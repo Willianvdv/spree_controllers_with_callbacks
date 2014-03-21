@@ -1,7 +1,7 @@
-SpreeControllersWithCallbacks
-=============================
+Spree Controllers With Callbacks
+================================
 
-Introduction goes here.
+Makes extending controllers fun again.
 
 Installation
 ------------
@@ -9,15 +9,55 @@ Installation
 Add spree_controllers_with_callbacks to your Gemfile:
 
 ```ruby
-gem 'spree_controllers_with_callbacks'
+gem 'spree_controllers_with_callbacks', github: 'willianvdv/spree_controllers_with_callbacks'
 ```
 
-Bundle your dependencies and run the installation generator:
+Supported controllers / actions
+-------------------------------
 
-```shell
-bundle
-bundle exec rails g spree_controllers_with_callbacks:install
+- Spree::ProductController#show
+- Spree::ProductController#index
+
+
+
+Usage
+-----
+
+So lets say you only want to show blue products in your index. Just do:
+
 ```
+Spree::ProductController.class_eval do
+  set_callback :index, :after, :only_show_blue_products
+
+  private
+
+  def only_show_blue_products
+    @products = @products.where(color: 'blue')
+  end
+
+end
+
+```
+
+If some extension uses this callback module and removed for some reason all
+yellow products, you can get this undone by doing:
+```
+Spree::ProductController.class_eval do
+  skip_callback :index, :only_show_yellow_products
+end
+```
+
+Or make conditional callbacks:
+```
+Spree::ProductController.class_eval do
+  set_callback :index, :only_show_blue_products, if: -> { self.likes_blue? }
+end
+```
+
+
+The great thing is, if you want to add another filter on an existing filter chain.
+Just register a new callback like I did in the first example
+
 
 Testing
 -------
@@ -30,11 +70,4 @@ bundle exec rake test_app
 bundle exec rspec spec
 ```
 
-When testing your applications integration with this extension you may use it's factories.
-Simply add this require statement to your spec_helper:
-
-```ruby
-require 'spree_controllers_with_callbacks/factories'
-```
-
-Copyright (c) 2014 [name of extension creator], released under the New BSD License
+Copyright (c) 2014 Willian van der Velde, released under the New BSD License
