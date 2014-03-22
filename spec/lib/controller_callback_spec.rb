@@ -10,16 +10,9 @@ end
 
 TestController.class_eval do
   include ControllerCallback
-
   attr_reader :test_for_show
 
-  set_callback :show, :after, :assign_test_for_show
-
-  private
-
-  def assign_test_for_show
-    @test_for_show = true
-  end
+  set_callback :show, :after, Proc.new { @test_for_show = true }
 end
 
 describe ControllerCallback do
