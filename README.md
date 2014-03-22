@@ -1,6 +1,8 @@
 [WIP] Spree Controllers With Callbacks
 ======================================
 
+[![Build Status](https://travis-ci.org/Willianvdv/spree_controllers_with_callbacks.svg)](https://travis-ci.org/Willianvdv/spree_controllers_with_callbacks)
+
 Makes extending controllers fun again.
 
 Installation
