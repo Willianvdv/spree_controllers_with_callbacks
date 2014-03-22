@@ -1,5 +1,5 @@
-Spree Controllers With Callbacks
-================================
+[WIP] Spree Controllers With Callbacks
+======================================
 
 Makes extending controllers fun again.
 
@@ -23,7 +23,7 @@ Supported controllers / actions
 Usage
 -----
 
-So lets say you only want to show blue products in your index. Just do:
+Lets say you only want to show blue products in your index. Just do:
 
 ```
 Spree::ProductController.class_eval do
@@ -34,9 +34,14 @@ Spree::ProductController.class_eval do
   def only_show_blue_products
     @products = @products.where(color: 'blue')
   end
-
 end
 
+```
+Or make conditional callbacks:
+```
+Spree::ProductController.class_eval do
+  set_callback :index, :only_show_blue_products, if: -> { self.likes_blue? }
+end
 ```
 
 If some extension uses this callback module and removed for some reason all
@@ -46,14 +51,6 @@ Spree::ProductController.class_eval do
   skip_callback :index, :only_show_yellow_products
 end
 ```
-
-Or make conditional callbacks:
-```
-Spree::ProductController.class_eval do
-  set_callback :index, :only_show_blue_products, if: -> { self.likes_blue? }
-end
-```
-
 
 The great thing is, if you want to add another filter on an existing filter chain.
 Just register a new callback like I did in the first example
