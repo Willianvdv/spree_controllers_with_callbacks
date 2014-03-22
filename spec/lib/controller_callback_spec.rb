@@ -4,27 +4,15 @@ class TestController
   def show
     return :return_value
   end
+
+  def index; end
 end
 
 TestController.class_eval do
   include ControllerCallback
-
   attr_reader :test_for_show
 
-  set_callback :show, :after, :assign_test_for_show
-
-  def show_with_callbacks
-    action_with_callbacks :show
-  end
-
-  alias_method :show_without_callbacks, :show
-  alias_method :show, :show_with_callbacks
-
-  private
-
-  def assign_test_for_show
-    @test_for_show = true
-  end
+  set_callback :show, :after, Proc.new { @test_for_show = true }
 end
 
 describe ControllerCallback do
