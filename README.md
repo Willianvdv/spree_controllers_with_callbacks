@@ -2,6 +2,7 @@
 ======================================
 
 [![Build Status](https://travis-ci.org/Willianvdv/spree_controllers_with_callbacks.svg)](https://travis-ci.org/Willianvdv/spree_controllers_with_callbacks)
+[![Coverage Status](https://coveralls.io/repos/Willianvdv/spree_controllers_with_callbacks/badge.png)](https://coveralls.io/r/Willianvdv/spree_controllers_with_callbacks)
 
 Makes extending controllers fun again.
 
