@@ -4,6 +4,8 @@ class TestController
   def show
     return :return_value
   end
+
+  def index; end
 end
 
 TestController.class_eval do
@@ -12,13 +14,6 @@ TestController.class_eval do
   attr_reader :test_for_show
 
   set_callback :show, :after, :assign_test_for_show
-
-  def show_with_callbacks
-    action_with_callbacks :show
-  end
-
-  alias_method :show_without_callbacks, :show
-  alias_method :show, :show_with_callbacks
 
   private
 
