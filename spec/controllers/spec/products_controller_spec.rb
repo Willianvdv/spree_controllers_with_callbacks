@@ -1,4 +1,8 @@
+require 'spec_helper'
+
 describe Spree::ProductsController do
+  let(:product) { create(:product) }
+
   before do
     Spree::ProductsController.class_eval do
       set_callback :show, :after, :assign_test
@@ -14,13 +18,15 @@ describe Spree::ProductsController do
 
   describe '.index' do
     it 'should assign test' do
-      get :index
+      spree_get :index
       assert assigns(:test)
     end
   end
 
   describe '.show' do
-    get :show
-    assert assigns(:test)
+    it 'should assign test' do
+      spree_get :show, id: product.slug
+      assert assigns(:test)
+    end
   end
 end
