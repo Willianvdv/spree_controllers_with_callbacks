@@ -4,12 +4,12 @@ class TestController
   def show
     return :return_value
   end
-
-  def index; end
 end
 
 TestController.class_eval do
   include ControllerCallback
+  use_callbacks_for :show
+
   attr_reader :test_for_show
 
   set_callback :show, :after, Proc.new { @test_for_show = true }

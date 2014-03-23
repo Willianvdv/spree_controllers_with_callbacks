@@ -8,7 +8,8 @@ module ControllerCallback
     define_callbacks :show
     define_callbacks :index
 
-    [:show, :index].each do |action|
+
+    def self.use_callbacks_for action
       # Create a new method that calls the orinal method surrounded with
       # the run_callbacks
       define_method "#{action}_with_callbacks" do
