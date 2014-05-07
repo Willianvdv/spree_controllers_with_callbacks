@@ -12,7 +12,7 @@ Installation
 Add spree_controllers_with_callbacks to your Gemfile:
 
 ```ruby
-gem 'spree_controllers_with_callbacks', github: 'willianvdv/spree_controllers_with_callbacks'
+gem 'spree_controllers_with_callbacks'
 ```
 
 Supported controllers / actions
