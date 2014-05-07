@@ -38,7 +38,6 @@ Spree::ProductController.class_eval do
     @products = @products.where(color: 'blue')
   end
 end
-
 ```
 Or make conditional callbacks:
 ```
